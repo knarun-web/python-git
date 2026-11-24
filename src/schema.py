@@ -7,12 +7,10 @@
 
 class SchemaError(Exception):
     """Raised when a row is missing required fields or fails schema validation."""
-    pass
 
 
 class FileFormatError(Exception):
     """Raised when a file is missing, empty, or cannot be parsed."""
-    pass
 
 
 # ---------------------------------------------------------------------------

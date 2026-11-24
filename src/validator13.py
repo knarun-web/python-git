@@ -5,8 +5,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from schema import SchemaError, FileFormatError, ALLOWED_ORDER_STATUSES
-
+from schema import ALLOWED_ORDER_STATUSES, FileFormatError, SchemaError
 
 # ---------------------------------------------------------------------------
 # Regex patterns
@@ -81,16 +80,14 @@ def validate_row(
 
     # Task 6 — zip prefix must be 5 digits
     for col in ("customer_zip_code_prefix", "seller_zip_code_prefix"):
-        if col in row and row[col].strip():
-            if not ZIP_PREFIX_RE.match(row[col].strip()):
-                errors.append(f"row {row_num}: '{col}' must be 5 digits (got {row[col]!r})")
+        if col in row and row[col].strip() and not ZIP_PREFIX_RE.match(row[col].strip()):
+            errors.append(f"row {row_num}: '{col}' must be 5 digits (got {row[col]!r})")
 
     # Task 6 — IDs must be 32 hex characters
     for col in ("order_id", "customer_id", "product_id", "seller_id",
                 "customer_unique_id", "review_id"):
-        if col in row and row[col].strip():
-            if not HEX_ID_RE.match(row[col].strip()):
-                errors.append(f"row {row_num}: '{col}' must be 32 hex chars (got {row[col]!r})")
+        if col in row and row[col].strip() and not HEX_ID_RE.match(row[col].strip()):
+            errors.append(f"row {row_num}: '{col}' must be 32 hex chars (got {row[col]!r})")
 
     return errors
 
@@ -109,6 +106,8 @@ def write_bad_records(bad_rows: list[dict], output_path: str) -> None:
     if not bad_rows:
         return
     fieldnames = list(bad_rows[0].keys())
+    from pathlib import Path
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
