@@ -1,0 +1,16 @@
+{
+  "order_id": "order_id",
+  "customer_id": "customer_id",
+  "order_status": "order_status",
+  "order_purchase_timestamp": "purchased_at",
+  "order_approved_at": "approved_at",
+  "order_delivered_carrier_date": "carrier_delivered_at",
+  "order_delivered_customer_date": "customer_delivered_at",
+  "order_estimated_delivery_date": "estimated_delivery_at",
+  "price": "price",
+  "freight_value": "freight_value",
+  "product_id": "product_id",
+  "seller_id": "seller_id",
+  "shipping_limit_date": "shipping_limit_at",
+  "order_item_id": "item_sequence"
+}

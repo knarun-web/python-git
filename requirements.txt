@@ -1,1 +1,4 @@
-﻿notebook
+notebook
+jupyterlab
+ipykernel
+pytest
