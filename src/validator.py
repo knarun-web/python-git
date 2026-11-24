@@ -1,8 +1,7 @@
 """validator.py - Column name and schema validation utilities."""
 
-import re
 import json
-from pathlib import Path
+import re
 
 
 def to_snake_case(name: str) -> str:

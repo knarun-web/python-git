@@ -1,0 +1,42 @@
+# config.yaml - Central configuration for the Olist pipeline
+
+paths:
+  input_folder: "../data"
+  output_folder: "../data/output"
+  log_folder: "../logs"
+  manifest_file: "../data/output/manifest.json"
+  bad_records_file: "../data/output/bad_records.csv"
+  column_mapping: "../config/column_mapping.json"
+
+files:
+  - orders.csv
+  - order_items.csv
+  - customers.csv
+
+thresholds:
+  rejection_rate: 0.20
+
+pipeline:
+  float_cols:
+    - price
+    - freight_value
+  datetime_cols:
+    - shipping_limit_at
+  required_fields:
+    orders.csv:
+      - order_id
+      - customer_id
+      - order_status
+      - order_purchase_timestamp
+      - order_estimated_delivery_date
+    order_items.csv:
+      - order_id
+      - product_id
+      - seller_id
+      - price
+      - freight_value
+      - shipping_limit_date
+    customers.csv:
+      - customer_id
+      - customer_unique_id
+      - customer_zip_code_prefix

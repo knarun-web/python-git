@@ -1,7 +1,6 @@
 """reader.py - CSV reading utilities for Olist data."""
 
 import csv
-from pathlib import Path
 
 
 def read_csv(path: str) -> list[dict]:
